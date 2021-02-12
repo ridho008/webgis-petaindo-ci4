@@ -25,10 +25,12 @@ class Maps extends BaseController
 
       $nilaiMax = $model->select("MAX(nilai) AS nilai")->where('id_master_data', 1)->first()->nilai;
 
-
+      $masterDataModel = new \App\Models\MasterDataModel();
+      $masterData = $masterDataModel->find(1);
 		return view('maps/index', [
          'data' => $features,
-         'nilaiMax' => $nilaiMax
+         'nilaiMax' => $nilaiMax,
+         'masterData' => $masterData
       ]);
 	}
 }
