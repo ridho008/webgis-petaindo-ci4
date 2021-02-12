@@ -33,13 +33,23 @@
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
-          <li class="nav-item active  ">
-            <a class="nav-link" href="#0">
+          <li class="nav-item<?= (uri_string() == '/') ? ' active' : '' ?>">
+            <a class="nav-link" href="/">
               <i class="material-icons">dashboard</i>
               <p>Dashboard</p>
             </a>
           </li>
           <!-- your sidebar here -->
+          <li class="nav-item<?= (uri_string() == 'kodeWilayah') ? ' active' : '' ?>">
+            <a class="nav-link" href="/kodeWilayah">
+              <i class="material-icons">bubble_chart</i> <p>Kode Wilayah</p>
+            </a>
+          </li>
+          <li class="nav-item<?= (uri_string() == 'data') ? ' active' : '' ?>">
+            <a class="nav-link" href="/data">
+              <i class="material-icons">bar_chart</i> <p>Data</p>
+            </a>
+          </li>
         </ul>
       </div>
     </div>
