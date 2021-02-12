@@ -12,9 +12,29 @@ class Data extends BaseController
 	public function index()
 	{
       $dataModel = new \App\Models\DataModel();
-      $data = $dataModel->joinDataToMaster();
+      $page = 1;
+      $keyword = '';
+      // $currentPage = $this->request->getVar('page_kode_wilayah') ? $this->request->getVar('page_kode_wilayah') : 1;
+
+      if($this->request->getPost('keyword')) {
+         $keyword = $this->request->getPost('keyword');
+      }
+
+      if($this->request->getGet()) {
+         $page = $this->request->getGet('page');
+      }
+
+      $perPage = 10;
+      $limit = $perPage;
+      $offset = ($page - 1) * $perPage;
+      $data = $dataModel->joinDataToMaster($limit, $offset, $keyword);
+      $total = $dataModel->countDataToMaster($keyword);
 		return view('data/index', [
-         'data' => $data
+         'data' => $data,
+         'perPage' => $perPage,
+         'page' => $page,
+         'offset' => $offset,
+         'total' => $total
       ]);
 	}
 

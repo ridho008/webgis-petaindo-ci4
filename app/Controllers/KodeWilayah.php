@@ -12,9 +12,19 @@ class KodeWilayah extends BaseController
 	public function index()
 	{
       $model = new \App\Models\KodeWilayahModel();
-      $kode_wilayah = $model->findAll();
+      // $kode_wilayah = $model->findAll();
+      $currentPage = $this->request->getVar('page_kode_wilayah') ? $this->request->getVar('page_kode_wilayah') : 1;
+
+      if($this->request->getPost('keyword')) {
+         $kode_wilayah = $model->like('nama_wilayah', $this->request->getPost('keyword'))->orLike('kode_wilayah', $this->request->getPost('keyword'));
+      } else {
+         $kode_wilayah = $model;
+      }
+
 		return view('kode-wilayah/index', [
-         'kode_wilayah' => $kode_wilayah
+         'kode_wilayah' => $kode_wilayah->paginate(10, 'kode_wilayah'),
+         'pager' => $model->pager,
+         'currentPage' => $currentPage
       ]);
 	}
 

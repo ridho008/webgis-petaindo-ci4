@@ -34,8 +34,31 @@
 </style>
 <?= $this->endSection(); ?>
 
+<?php 
+$dropMenu = [
+   'name' => 'master',
+   'options' => $masterDataMenu,
+   'class' => 'form-control'
+];
+$submit = [
+   'name' => 'submit',
+   'id' => 'submit',
+   'value' => 'Pilih Data',
+   'class' => 'btn btn-primary',
+   'type' => 'submit'
+];
+?>
 <?= $this->section('content'); ?>
-<h1>Peta Indonesia</h1>
+<div class="row">
+   <div class="col-md-6">
+      <?= form_open('/maps'); ?>
+         <?= form_dropdown($dropMenu); ?>
+   </div>
+   <div class="col-md-3">
+      <?= form_submit($submit); ?>
+      <?= form_close(); ?>
+   </div>
+</div>
 <div id="maps"></div>
 <?= $this->endSection(); ?>
 
